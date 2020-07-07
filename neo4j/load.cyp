@@ -68,3 +68,9 @@ MATCH (i:Interaction)
 WITH i, i.pubmed_id as pubmed_id
 MATCH (a:Article) WHERE a.pubmed_id = pubmed_id
 MERGE (i)-[:MENTIONED_IN]->(a)
+
+// Create (Gene)-[:MENTIONED_IN]->(Article)
+MATCH (i:Interaction)-[:MENTIONED_IN]->(a:Article)
+WITH i, a, [i.gene_a, i.gene_b] as genes
+MATCH (g:Gene) WHERE g.name IN genes
+MERGE (g)-[:MENTIONED_IN]->(a)
