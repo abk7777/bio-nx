@@ -49,6 +49,11 @@ WITH i, i.gene_b as gene, i.entrez_id_b as entrez_id, i.synonyms_b as synonyms, 
 MATCH (g:Gene { name: gene })
 SET g.entrez_id = entrez_id, g.synonyms = synonyms, g.organism = organism;
 
+MATCH (g:Gene) WITH g
+SET g.ncbi_url = "", g.wikipedia_url = "", g.locus_type = "", 
+	g.full_sequence = "", g.chromosome_location = "", 
+    g.base_pairs = "";
+
 // Create (Gene1)-[:INTERACTS_WITH]-(Gene2)
 MATCH (g1:Gene)-[:INTERACTOR_IN]->(i:Interaction),
 	(g2:Gene)-[:INTERACTOR_IN]->(i)
@@ -67,10 +72,10 @@ CREATE (:Article {
 MATCH (i:Interaction)
 WITH i, i.pubmed_id as pubmed_id
 MATCH (a:Article) WHERE a.pubmed_id = pubmed_id
-MERGE (i)-[:MENTIONED_IN]->(a)
+MERGE (i)-[:MENTIONED_IN]->(a);
 
 // Create (Gene)-[:MENTIONED_IN]->(Article)
 MATCH (i:Interaction)-[:MENTIONED_IN]->(a:Article)
 WITH i, a, [i.gene_a, i.gene_b] as genes
 MATCH (g:Gene) WHERE g.name IN genes
-MERGE (g)-[:MENTIONED_IN]->(a)
+MERGE (g)-[:MENTIONED_IN]->(a);
