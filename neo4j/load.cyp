@@ -21,6 +21,7 @@ CREATE (i:Interaction {
     organism_b: line.`Organism Interactor B`    
     });
     
+// Create Gene nodes
 MATCH (i:Interaction)
 WITH split(apoc.text.join(collect(i.gene_a + ", " + i.gene_b), 
 	", "), ", ") as genes
@@ -28,9 +29,26 @@ UNWIND genes as gene
 WITH DISTINCT gene
 CREATE (g:Gene { name: gene });
 
+// Create (Gene)-[:INTERACTOR_IN]->(Interaction)
 MATCH (i:Interaction)
 WITH i, split(apoc.text.join(collect(i.gene_a + ", " + i.gene_b), 
 	", "), ", ") as genes
 UNWIND genes as gene
 MATCH (g:Gene { name: gene })
 MERGE (g)-[:INTERACTOR_IN]->(i);
+
+// Set Gene node properties
+MATCH (i:Interaction)
+WITH i, i.gene_a as gene, i.entrez_id_a as entrez_id, i.synonyms_a as synonyms, i.organism_a as organism
+MATCH (g:Gene { name: gene })
+SET g.entrez_id = entrez_id, g.synonyms = synonyms, g.organism = organism;
+
+MATCH (i:Interaction)
+WITH i, i.gene_b as gene, i.entrez_id_b as entrez_id, i.synonyms_b as synonyms, i.organism_b as organism
+MATCH (g:Gene { name: gene })
+SET g.entrez_id = entrez_id, g.synonyms = synonyms, g.organism = organism;
+
+// Create (Gene1)-[:INTERACTS_WITH]-(Gene2)
+MATCH (g1:Gene)-[:INTERACTOR_IN]->(i:Interaction),
+	(g2:Gene)-[:INTERACTOR_IN]->(i)
+MERGE (g1)-[:INTERACTS_WITH]-(g2);
