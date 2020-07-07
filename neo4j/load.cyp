@@ -4,10 +4,11 @@ LOAD CSV WITH HEADERS
 FROM 'file:///graph_data.csv' AS line
 
 // Interaction nodes
-CREATE (i:Interaction { 
+CREATE (:Interaction { 
 	biogrid_id: line.`BioGRID Interaction ID`,
 	author: line.Author,
     pubmed_id: line.`Pubmed ID`,
+    publication_year: line.`Publication Year`,
     experimental_system: line.`Experimental System`,
     experimental_system_type: line.`Experimental System Type`,
     throughput: line.`Throughput`,
@@ -27,7 +28,7 @@ WITH split(apoc.text.join(collect(i.gene_a + ", " + i.gene_b),
 	", "), ", ") as genes
 UNWIND genes as gene
 WITH DISTINCT gene
-CREATE (g:Gene { name: gene });
+CREATE (:Gene { name: gene });
 
 // Create (Gene)-[:INTERACTOR_IN]->(Interaction)
 MATCH (i:Interaction)
@@ -52,3 +53,12 @@ SET g.entrez_id = entrez_id, g.synonyms = synonyms, g.organism = organism;
 MATCH (g1:Gene)-[:INTERACTOR_IN]->(i:Interaction),
 	(g2:Gene)-[:INTERACTOR_IN]->(i)
 MERGE (g1)-[:INTERACTS_WITH]-(g2);
+
+// Create Article nodes
+MATCH (i:Interaction)
+WITH DISTINCT [i.pubmed_id, i.author, i.publication_year] as article_node
+CREATE (:Article { 
+	pubmed_id: article_node[0],
+    author: article_node[1],
+    publication_year: article_node[2]
+    });
