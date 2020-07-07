@@ -16,15 +16,29 @@ CREATE (i:Interaction {
     synonyms_a: line.`Synonyms Interactor A`,
     organism_a: line.`Organism Interactor A`,
     gene_b: line.`Official Symbol Interactor B`,
-    entrez_id_b: line.`Entrez Gene Interactor A`,
+    entrez_id_b: line.`Entrez Gene Interactor B`,
     synonyms_b: line.`Synonyms Interactor B`,
     organism_b: line.`Organism Interactor B`    
     });
     
 MATCH (i:Interaction)
 WITH DISTINCT i.gene_a as name
-CREATE (g:Gene { name: name });
+CREATE (g:Gene { 
+	name: name
+    });
 
 MATCH (i:Interaction)
 WITH DISTINCT i.gene_b as name
-MERGE (g:Gene { name: name });
+MERGE (g:Gene { 
+	name: name
+    });
+
+
+
+// , i.entrez_id_a as entrez_id, 
+// 	i.synonyms_a as synonyms, i.organism_a as organism
+
+//     ,
+//     entrez_id_a: entrez_id,
+//     synonyms_a: synonyms,
+//     organism_a: organism
