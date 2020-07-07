@@ -26,14 +26,4 @@ WITH split(apoc.text.join(collect(i.gene_a + ", " + i.gene_b),
 	", "), ", ") as genes
 UNWIND genes as gene
 WITH DISTINCT gene
-CREATE (g:Gene { name: gene  })
-
-
-
-// , i.entrez_id_a as entrez_id, 
-// 	i.synonyms_a as synonyms, i.organism_a as organism
-
-//     ,
-//     entrez_id_a: entrez_id,
-//     synonyms_a: synonyms,
-//     organism_a: organism
+CREATE (g:Gene { name: gene });
