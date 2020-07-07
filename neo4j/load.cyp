@@ -27,3 +27,10 @@ WITH split(apoc.text.join(collect(i.gene_a + ", " + i.gene_b),
 UNWIND genes as gene
 WITH DISTINCT gene
 CREATE (g:Gene { name: gene });
+
+MATCH (i:Interaction)
+WITH i, split(apoc.text.join(collect(i.gene_a + ", " + i.gene_b), 
+	", "), ", ") as genes
+UNWIND genes as gene
+MATCH (g:Gene { name: gene })
+MERGE (g)-[:INTERACTOR_IN]->(i);
