@@ -50,9 +50,9 @@ MATCH (g:Gene { name: gene })
 SET g.entrez_id = entrez_id, g.synonyms = synonyms, g.organism = organism;
 
 MATCH (g:Gene) WITH g
-SET g.ncbi_url = "", g.wikipedia_url = "", g.locus_type = "", 
-	g.full_sequence = "", g.chromosome_location = "", 
-    g.base_pairs = "";
+SET g.ncbi_url = "url", g.wikipedia_url = "url", g.locus_type = "locus type", 
+	g.full_sequence = "sequence url", g.chromosome_location = "location", 
+    g.base_pairs = "base pairs";
 
 // Create (Gene1)-[:INTERACTS_WITH]-(Gene2)
 MATCH (g1:Gene)-[:INTERACTOR_IN]->(i:Interaction),
@@ -64,6 +64,7 @@ MATCH (i:Interaction)
 WITH DISTINCT [i.pubmed_id, i.author, i.publication_year] as article_node
 CREATE (:Article { 
 	pubmed_id: article_node[0],
+    title: "title",
     author: article_node[1],
     publication_year: article_node[2]
     });
@@ -79,3 +80,14 @@ MATCH (i:Interaction)-[:MENTIONED_IN]->(a:Article)
 WITH i, a, [i.gene_a, i.gene_b] as genes
 MATCH (g:Gene) WHERE g.name IN genes
 MERGE (g)-[:MENTIONED_IN]->(a);
+
+// Create Author nodes
+MATCH (i:Interaction)
+WITH DISTINCT i.author as author
+CREATE (a:Author { name: author, publications: "count" });
+
+// Create (Author)-[:PUBLISHED]->(Article)
+MATCH (a:Article)
+WITH a, a.author as author
+MATCH (au:Author { name: author })
+MERGE (au)-[:PUBLISHED]->(a)
