@@ -62,3 +62,9 @@ CREATE (:Article {
     author: article_node[1],
     publication_year: article_node[2]
     });
+
+// Create (Interaction)-[:MENTIONED_IN]->(Article)
+MATCH (i:Interaction)
+WITH i, i.pubmed_id as pubmed_id
+MATCH (a:Article) WHERE a.pubmed_id = pubmed_id
+MERGE (i)-[:MENTIONED_IN]->(a)
