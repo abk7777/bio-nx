@@ -22,16 +22,11 @@ CREATE (i:Interaction {
     });
     
 MATCH (i:Interaction)
-WITH DISTINCT i.gene_a as name
-CREATE (g:Gene { 
-	name: name
-    });
-
-MATCH (i:Interaction)
-WITH DISTINCT i.gene_b as name
-MERGE (g:Gene { 
-	name: name
-    });
+WITH split(apoc.text.join(collect(i.gene_a + ", " + i.gene_b), 
+	", "), ", ") as genes
+UNWIND genes as gene
+WITH DISTINCT gene
+CREATE (g:Gene { name: gene  })
 
 
 
