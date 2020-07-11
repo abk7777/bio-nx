@@ -4,3 +4,15 @@ The motivation behind this project is to further integrate the massive amount of
 # Data Sources
 * [bioGRID](https://thebiogrid.org/)
 
+# Notes
+Examples of nodes:
+* Genes
+* Protein Complexes
+* Drug Molecules and other compounds
+* RNA
+* Tissue, Organs, System
+* Experiments
+* Geographic Coordinates
+* Specimen samples
+* Post-translation Modifications
+
