@@ -1,7 +1,7 @@
 MATCH (n) DETACH DELETE n;
 
 LOAD CSV WITH HEADERS
-FROM 'file:///graph_data.csv' AS line
+FROM 'file:///biogrid_ppi_data.csv' AS line
 
 // Interaction nodes
 CREATE (:Interaction { 
@@ -90,4 +90,4 @@ CREATE (a:Author { name: author, publications: "count" });
 MATCH (a:Article)
 WITH a, a.author as author
 MATCH (au:Author { name: author })
-MERGE (au)-[:PUBLISHED]->(a)
+MERGE (au)-[:PUBLISHED]->(a);
