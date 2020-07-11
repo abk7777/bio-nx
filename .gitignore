@@ -75,6 +75,9 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
+# Jupyter notebooks
+0.2-graph-OGM.ipynb
+
 # exclude data from source control by default
 /data/
 
