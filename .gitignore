@@ -92,7 +92,10 @@ target/
 .mypy_cache/
 
 # Directories
-/ppicrawler
+ppicrawler/
 
 # Notes
 ideas.txt
+
+# venv
+.venv_bionx/
