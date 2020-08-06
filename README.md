@@ -85,4 +85,4 @@ Project Link: [https://github.com/abk7777/bioNX](https://github.com/abk7777/bioN
 
 ## License
 
-This project is not yet licensed.
+This project does not yet have a license.
