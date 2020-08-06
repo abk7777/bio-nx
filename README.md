@@ -12,12 +12,13 @@ An advantage of Knowledge Graphs (and graph databases in general) is the ability
 
 #### -- Project Status: [Active]
 
-## Data Sources
+## Current Data Sources
 * [bioGRID](https://thebiogrid.org/) - primary data source for PPIs
-* [HGNC](https://www.genenames.org/)
-* [PubMed](https://pubmed.ncbi.nlm.nih.gov/)
-* [Uniprot](https://www.uniprot.org/)
-* [Entrez](https://www.ncbi.nlm.nih.gov/Web/Search/entrezfs.html)
+* [HGNC](https://www.genenames.org/) - Gene nomenclature reference
+* [PubMed](https://pubmed.ncbi.nlm.nih.gov/) - Literature
+* [Uniprot](https://www.uniprot.org/) - Protein properties
+* [Entrez](https://www.ncbi.nlm.nih.gov/Web/Search/entrezfs.html) - Gene properties
+* [GO](http://geneontology.org/) - Gene properties
 
 ## Usage
 
@@ -27,7 +28,7 @@ Basic CLI usage using MTHFR gene involved in amino acid metabolism:
 bionx build-graph MTHFR
 ```
 
-Neo4j example query returning genes, interactions, and author for MTHFR gene mentioned in [PubMed article "29229926"](https://pubmed.ncbi.nlm.nih.gov/29229926/):
+Example Cypher query returning genes, interactions, and author for MTHFR gene mentioned in [PubMed article "29229926"](https://pubmed.ncbi.nlm.nih.gov/29229926/):
 ```cypher
 MATCH (gene1:Gene { name: 'MTHFR' })-[:INTERACTS_WITH]-(gene2:Gene),
 (gene1)-[:MENTIONED_IN]->(article:Article { pubmed_id:"29229926" })<-[:MENTIONED_IN]-(gene2), (article)<-[:PUBLISHED]-(author:Author), (gene1)-[:INTERACTOR_IN]->(interaction:Interaction)<-[:INTERACTOR_IN]-(gene2)
@@ -37,7 +38,9 @@ RETURN gene1, gene2, author, article, interaction;
 
 *Please note: bioNX is under development.*
 
-## Current Nodes/Relationships (using Cypher syntax)
+## Roadmap
+
+### Current Nodes/Relationships (using Cypher syntax)
 * `(Gene)-[:INTERACTOR_IN]->(Interaction)`
 * `(Gene1)-[:INTERACTS_WITH]-(Gene2)`
 * `(Interaction)-[:MENTIONED_IN]->(Article)`
@@ -46,18 +49,9 @@ RETURN gene1, gene2, author, article, interaction;
 
 ![Neo4j Screenshot](./img/neo4j-screenshot.png)
 
-## Built With
-
-* [Python](https://docs.python.org/3/)
-* [Click](https://click.palletsprojects.com/en/7.x/)
-* [Neo4j](https://neo4j.com/)
-
-## Roadmap
-
-See the [open issues](https://github.com/abk7777/bioNX/issues) for a list of proposed features (and known issues).
-
-Basic improvements:
-* Expand graph schema to include: 
+### Future Implementations
+See the [open issues](https://github.com/abk7777/bioNX/issues) for a list of proposed features (and known issues). The current design includes these improvements:
+* Expand graph schema to nodes for: 
   * Protein complexes
   * Cofactors
   * RNAs
@@ -72,6 +66,17 @@ Basic improvements:
 * Build command line interface
 * Docker integration
 * AWS integration (S3, RDS, Lambda etc.)
+
+Please feel free to include suggestions for things like:
+* Nodes & Relationships
+* Data sources
+* Functionality
+
+## Built With
+
+* [Python](https://docs.python.org/3/)
+* [Click](https://click.palletsprojects.com/en/7.x/)
+* [Neo4j](https://neo4j.com/)
 
 ## Contributing
 
