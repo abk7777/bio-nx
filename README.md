@@ -14,9 +14,8 @@ A `bioNX` Knowledge Graph allows the linking of biological data across disparate
 
 An advantage of Knowledge Graphs (and graph databases in general) is the ability to access the immediate context of any data point, something that tabular data models (ie., spreadsheets, RDBMS) cannot easily do. This can save time and expedite the discovery process.
 
-`bioNX` is a work in progress.
-
 #### -- Project Status: [Active]
+*`bioNX` is currently a work in progress.*
 
 ## Current Data Sources
 * [bioGRID](https://thebiogrid.org/) - primary data source for PPIs
@@ -28,26 +27,21 @@ An advantage of Knowledge Graphs (and graph databases in general) is the ability
 
 ## Getting Started
 
+### 1. Installation
 Clone repo:
-
 ```sh
 git clone https://github.com/abk7777/bioNX
 ```
 
-
+Install Python libraries:
 ```sh
-pip install -f requirements.txt
+pip install -r requirements.txt
 ```
 
-### Installation
- 
-1. Clone the repo
+### 2. Run Jupyter Notebook
+Run notebook
 ```sh
-git clone https://github.com/github_username/repo.git
-```
-2. Install NPM packages
-```sh
-npm install
+jupyter notebook
 ```
 
 ## Usage
@@ -70,7 +64,9 @@ RETURN gene1, gene2, author, article, interaction;
 
 ## Roadmap
 
-### Current Nodes/Relationships (using Cypher syntax)
+### Current Functionality
+Running `load.cyp` in Neo4j will produce a graph containing the following schema:
+
 * `(Gene)-[:INTERACTOR_IN]->(Interaction)`
 * `(Gene1)-[:INTERACTS_WITH]-(Gene2)`
 * `(Interaction)-[:MENTIONED_IN]->(Article)`
@@ -79,9 +75,11 @@ RETURN gene1, gene2, author, article, interaction;
 
 ![Neo4j Screenshot](./img/neo4j-screenshot.png)
 
+*Please note that while things are under development, you will need to configure Neo4j's import folder to match the directory where the data is saved when running the Jupyter Notebook.*
+
 ### Future Implementations
 See the [open issues](https://github.com/abk7777/bioNX/issues) for a list of proposed features (and known issues). The current design includes these improvements:
-* Expand graph schema to nodes for: 
+* Expand graph schema with nodes for: 
   * Protein complexes
   * Cofactors
   * RNAs
