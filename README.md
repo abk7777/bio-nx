@@ -1,3 +1,9 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 # bioNX: Automated Knowledge Graph construction of PPI networks
 
 ## About the Project
@@ -19,6 +25,30 @@ An advantage of Knowledge Graphs (and graph databases in general) is the ability
 * [Uniprot](https://www.uniprot.org/) - Protein properties
 * [Entrez](https://www.ncbi.nlm.nih.gov/Web/Search/entrezfs.html) - Gene properties
 * [GO](http://geneontology.org/) - Gene properties
+
+## Getting Started
+
+Clone repo:
+
+```sh
+git clone https://github.com/abk7777/bioNX
+```
+
+
+```sh
+pip install -f requirements.txt
+```
+
+### Installation
+ 
+1. Clone the repo
+```sh
+git clone https://github.com/github_username/repo.git
+```
+2. Install NPM packages
+```sh
+npm install
+```
 
 ## Usage
 
@@ -91,3 +121,14 @@ Project Link: [https://github.com/abk7777/bioNX](https://github.com/abk7777/bioN
 ## License
 
 This project does not yet have a license.
+
+[contributors-shield]: https://img.shields.io/github/contributors/abk7777/bioNX.svg?style=flat-square
+[contributors-url]: https://github.com/abk7777/bioNX/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/abk7777/bioNX.svg?style=flat-square
+[forks-url]: https://github.com/abk7777/bioNX/network/members
+[stars-shield]: https://img.shields.io/github/stars/abk7777/bioNX.svg?style=flat-square
+[stars-url]: https://github.com/abk7777/bioNX/stargazers
+[issues-shield]: https://img.shields.io/github/issues/abk7777/bioNX.svg?style=flat-square
+[issues-url]: https://github.com/abk7777/bioNX/issues
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/gregory-lindsey/
