@@ -15,7 +15,7 @@ A `bioNX` Knowledge Graph allows the linking of biological data across disparate
 An advantage of Knowledge Graphs (and graph databases in general) is the ability to access the immediate context of any data point, something that tabular data models (ie., spreadsheets, RDBMS) cannot easily do. This can save time and expedite the discovery process.
 
 #### -- Project Status: [Active]
-*`bioNX` is currently a work in progress.*
+*Note: `bioNX` is currently a work in progress.*
 
 ## Current Data Sources
 * [bioGRID](https://thebiogrid.org/) - primary data source for PPIs
@@ -55,7 +55,9 @@ bionx build-graph MTHFR
 Example Cypher query returning genes, interactions, and author for MTHFR gene mentioned in [PubMed article "29229926"](https://pubmed.ncbi.nlm.nih.gov/29229926/):
 ```cypher
 MATCH (gene1:Gene { name: 'MTHFR' })-[:INTERACTS_WITH]-(gene2:Gene),
-(gene1)-[:MENTIONED_IN]->(article:Article { pubmed_id:"29229926" })<-[:MENTIONED_IN]-(gene2), (article)<-[:PUBLISHED]-(author:Author), (gene1)-[:INTERACTOR_IN]->(interaction:Interaction)<-[:INTERACTOR_IN]-(gene2)
+(gene1)-[:MENTIONED_IN]->(article:Article { pubmed_id:"29229926" })<-[:MENTIONED_IN]-(gene2), 
+(article)<-[:PUBLISHED]-(author:Author), 
+(gene1)-[:INTERACTOR_IN]->(interaction:Interaction)<-[:INTERACTOR_IN]-(gene2)
 RETURN gene1, gene2, author, article, interaction;
 ```
 ![MTHFR Graph in Neo4j](./img/mthfr-neo4j.png)
