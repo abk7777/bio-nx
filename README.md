@@ -2,6 +2,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # bioNX: Automated Knowledge Graph construction of PPI networks
@@ -143,5 +144,7 @@ Project Link: [https://github.com/abk7777/bioNX](https://github.com/abk7777/bioN
 [stars-url]: https://github.com/abk7777/bioNX/stargazers
 [issues-shield]: https://img.shields.io/github/issues/abk7777/bioNX.svg?style=flat-square
 [issues-url]: https://github.com/abk7777/bioNX/issues
+[license-shield]: https://img.shields.io/github/license/abk7777/bioNX.svg?style=flat-square
+[license-url]: https://github.com/abk7777/bioNX/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/gregory-lindsey/
