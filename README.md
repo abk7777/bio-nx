@@ -8,9 +8,9 @@
 
 ## About the Project
 
-The exponential accumulation of biological data presents a formidable challenge when it comes to integration and extraction of actionable insights. The `bioNX` platform aims to employ automated Knowledge Graph construction using Neo4j in order to provide a portable and user-friendly solution for researchers and labs investigating protein-protein interaction networks (PPIs).
+The exponential accumulation of biological data presents a formidable challenge when it comes to integration of new knowledge and the formulation of actionable insights. The `bioNX` project is an attempt to employ automated Knowledge Graph construction of protein-protein interaction networks using Neo4j as a way to demonstrate how such integration can be done.
 
-A `bioNX` Knowledge Graph allows the linking of biological data across disparate sources including as databases, APIs, literature and websites. It can provide insight to the relationships between nodes, which can be anything from academic literature, samples, or experiments, to subjects of inquiry such as gene products, PPIs, small molecules and disease conditions. It can even catalog GPS coordinates and time series data. 
+A `bioNX` Knowledge Graph links data from public APIs and databases as nodes, relationships and properties of each. As of the 
 
 An advantage of Knowledge Graphs (and graph databases in general) is the ability to access the immediate context of any data point, something that tabular data models (ie., spreadsheets, RDBMS) cannot easily do. This can save time and expedite the discovery process.
 

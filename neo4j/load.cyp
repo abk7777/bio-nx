@@ -1,25 +1,28 @@
 MATCH (n) DETACH DELETE n;
 
 LOAD CSV WITH HEADERS
-FROM 'file:///biogrid_ppi_data.csv' AS line
+FROM 'file:///bionx-ppi-PGRMC1.csv' AS line
 
 // Interaction nodes
 CREATE (:Interaction { 
-	biogrid_id: line.`BioGRID Interaction ID`,
-	author: line.Author,
-    pubmed_id: line.`Pubmed ID`,
-    publication_year: line.`Publication Year`,
-    experimental_system: line.`Experimental System`,
-    experimental_system_type: line.`Experimental System Type`,
-    throughput: line.`Throughput`,
-    gene_a: line.`Official Symbol Interactor A`,
-    entrez_id_a: line.`Entrez Gene Interactor A`,
-    synonyms_a: line.`Synonyms Interactor A`,
-    organism_a: line.`Organism Interactor A`,
-    gene_b: line.`Official Symbol Interactor B`,
-    entrez_id_b: line.`Entrez Gene Interactor B`,
-    synonyms_b: line.`Synonyms Interactor B`,
-    organism_b: line.`Organism Interactor B`    
+	biogrid_id: line.biogrid_interaction_id,
+	author: line.author,
+    pubmed_id: line.pubmed_id,
+    publication_year: line.publication_year,
+    publication_title: line.title,
+    doi: line.doi,
+    journal: line.full_journal_name,
+    experimental_system: line.experimental_system,
+    experimental_system_type: line.experimental_system_type,
+    throughput: line.throughput,
+    gene_a: line.official_symbol_interactor_a,
+    entrez_id_a: line.entrez_gene_interactor_a,
+    synonyms_a: line.synonyms_interactor_a,
+    organism_a: line.organism_interactor_a,
+    gene_b: line.official_symbol_interactor_b,
+    entrez_id_b: line.entrez_gene_interactor_b,
+    synonyms_b: line.synonyms_interactor_b,
+    organism_b: line.organism_interactor_b    
     });
     
 // Create Gene nodes
@@ -61,12 +64,19 @@ MERGE (g1)-[:INTERACTS_WITH]-(g2);
 
 // Create Article nodes
 MATCH (i:Interaction)
-WITH DISTINCT [i.pubmed_id, i.author, i.publication_year] as article_node
+WITH DISTINCT [
+    i.pubmed_id, 
+    i.author, 
+    i.publication_year, 
+    i.publication_title,
+    i.doi
+    ] as article_node
 CREATE (:Article { 
 	pubmed_id: article_node[0],
-    title: "title",
     author: article_node[1],
-    publication_year: article_node[2]
+    publication_year: article_node[2],
+    publication_title: article_node[3],
+    doi: article_node[4]
     });
 
 // Create (Interaction)-[:MENTIONED_IN]->(Article)
