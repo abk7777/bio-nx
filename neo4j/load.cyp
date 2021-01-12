@@ -1,7 +1,7 @@
 MATCH (n) DETACH DELETE n;
 
 LOAD CSV WITH HEADERS
-FROM 'file:///bionx-ppi-PGRMC1.csv' AS line
+FROM 'file:///biogrid_ppi_data.csv' AS line
 
 // Interaction nodes
 CREATE (:Interaction { 
@@ -53,9 +53,9 @@ MATCH (g:Gene { name: gene })
 SET g.entrez_id = entrez_id, g.synonyms = synonyms, g.organism = organism;
 
 MATCH (g:Gene) WITH g
-SET g.ncbi_url = "url", g.wikipedia_url = "url", g.locus_type = "locus type", 
-	g.full_sequence = "sequence url", g.chromosome_location = "location", 
-    g.base_pairs = "base pairs";
+SET g.ncbi_url = "<url>", g.wikipedia_url = "<url>", g.locus_type = "<locus type>", 
+	g.full_sequence = "<sequence url>", g.chromosome_location = "<location>", 
+    g.base_pairs = "<base pairs>";
 
 // Create (Gene1)-[:INTERACTS_WITH]-(Gene2)
 MATCH (g1:Gene)-[:INTERACTOR_IN]->(i:Interaction),
@@ -94,7 +94,7 @@ MERGE (g)-[:MENTIONED_IN]->(a);
 // Create Author nodes
 MATCH (i:Interaction)
 WITH DISTINCT i.author as author
-CREATE (a:Author { name: author, publications: "count" });
+CREATE (a:Author { name: author, publications: "<count>" });
 
 // Create (Author)-[:PUBLISHED]->(Article)
 MATCH (a:Article)
