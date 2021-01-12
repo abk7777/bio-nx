@@ -5,6 +5,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # bioNX: Automated Knowledge Graph construction of PPI networks
+Automate the construction of a Knowledge Graph containing interactions for any given gene.
 
 ## About the Project
 
@@ -13,8 +14,8 @@ The exponential accumulation of biological data presents a formidable challenge 
 Using a graph database makes it possible to explore the context and relationships in the data using various algorithms:
 * Community detection
 * Centrality to measure the importance of a node
-* Similarity and prediction
-* Predicting undiscovered relationships
+* Prediction of properties based on similarity
+* Prediction of undiscovered relationships
 * Finding the shortest paths between nodes
 
 #### -- Project Status: [Active] 
